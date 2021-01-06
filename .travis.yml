@@ -53,6 +53,11 @@ install:
       sudo python3 get-pip.py;
       pip3 install .;
   fi;
+- if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
+      echo 'DOCKER_OPTS="$DOCKER_OPTS --debug --registry-mirror=https://us-mirror.gcr.io"' | sudo tee -a /etc/default/docker > /dev/null;
+      sudo service docker restart
+  fi;
+
 
 script:
 - if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
